@@ -48,3 +48,22 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Environment variables
+
+1. Copy the example file and create your local `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Fill these values in `.env`:
+
+   - `EXPO_PUBLIC_SUPABASE_URL`
+   - `EXPO_PUBLIC_SUPABASE_ANON_KEY`
+
+3. Restart the dev server after changes to `.env`:
+
+   ```bash
+   npx expo start -c
+   ```
