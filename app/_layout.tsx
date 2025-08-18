@@ -2,12 +2,31 @@ import { DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { Text, View } from 'react-native'
 import 'react-native-reanimated'
-import ToastManager from 'toastify-react-native'
+import ToastManager from 'react-native-toast-message'
 
 import '../global.css'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
+
+const toastConfig = {
+	success: (props: any) => (
+		<View className='bg-green-400  p-4 rounded-2xl mt-8 w-[80%] flex-row items-center justify-center'>
+			<Text className='text-white  text-lg'>{props.text1}</Text>
+		</View>
+	),
+	error: (props: any) => (
+		<View className='bg-red-400  p-4 rounded-2xl mt-8 w-[80%] flex-row items-center justify-center'>
+			<Text className='text-white  text-lg'>{props.text1}</Text>
+		</View>
+	),
+	info: (props: any) => (
+		<View className='bg-blue-400  p-4 rounded-2xl mt-8 w-[80%] flex-row items-center justify-center'>
+			<Text className='text-white  text-lg'>{props.text1}</Text>
+		</View>
+	),
+}
 
 export default function RootLayout() {
 	const colorScheme = useColorScheme()
@@ -30,7 +49,7 @@ export default function RootLayout() {
 				<Stack.Screen name='+not-found' />
 			</Stack>
 			<StatusBar style='auto' />
-			<ToastManager />
+			<ToastManager config={toastConfig} />
 		</ThemeProvider>
 	)
 }

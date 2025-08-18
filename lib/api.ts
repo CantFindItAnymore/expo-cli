@@ -53,7 +53,7 @@ instance.interceptors.response.use(
 		}
 		toast.show({
 			type: 'error',
-			text1: 'network error, please try again later',
+			text1: 'network error',
 		})
 
 		return [null, error]
