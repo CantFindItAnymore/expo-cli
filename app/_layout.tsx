@@ -3,6 +3,8 @@ import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import 'react-native-reanimated'
+import ToastManager from 'toastify-react-native'
+
 import '../global.css'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
@@ -24,9 +26,11 @@ export default function RootLayout() {
 		<ThemeProvider value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
 			<Stack>
 				<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+				<Stack.Screen name='roleDetail' options={{ headerShown: false }} />
 				<Stack.Screen name='+not-found' />
 			</Stack>
 			<StatusBar style='auto' />
+			<ToastManager />
 		</ThemeProvider>
 	)
 }
