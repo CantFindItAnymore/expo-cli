@@ -7,7 +7,7 @@ import { Text, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import 'react-native-reanimated'
 import ToastManager from 'react-native-toast-message'
-
+import { GlobalLoading } from '../components/GlobalLoading'
 
 import '../global.css'
 
@@ -48,6 +48,8 @@ export default function RootLayout() {
 			<GestureHandlerRootView style={{ flex: 1 }}>
 				<BottomSheetModalProvider>
 					<Stack>
+						<Stack.Screen name='index' redirect />
+						<Stack.Screen name='login' options={{ headerShown: false }} />
 						<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
 						<Stack.Screen name='roleDetail' options={{ headerShown: false }} />
 						<Stack.Screen name='chat' options={{ headerShown: false }} />
@@ -55,6 +57,7 @@ export default function RootLayout() {
 					</Stack>
 					<StatusBar style='auto' />
 					<ToastManager config={toastConfig} />
+					<GlobalLoading />
 				</BottomSheetModalProvider>
 			</GestureHandlerRootView>
 		</ThemeProvider>
