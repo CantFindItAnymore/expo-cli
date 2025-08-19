@@ -51,10 +51,10 @@ export default function LoginScreen() {
 				{/* 顶部区域 */}
 				<View className='flex-1 justify-center items-center pt-15'>
 					<Text className='text-3xl font-bold text-white text-center mb-3'>
-						欢迎回来
+						Welcome Back
 					</Text>
 					<Text className='text-base text-white text-center opacity-80'>
-						登录您的账户以继续
+						Sign in to your account to continue
 					</Text>
 				</View>
 
@@ -68,7 +68,7 @@ export default function LoginScreen() {
 					>
 						<Ionicons name='logo-google' size={24} color='#000' />
 						<Text className='text-base font-semibold text-gray-800 ml-3'>
-							使用 Google 登录
+							Continue with Google
 						</Text>
 					</TouchableOpacity>
 
@@ -80,17 +80,22 @@ export default function LoginScreen() {
 					>
 						<Ionicons name='logo-apple' size={24} color='#FFFFFF' />
 						<Text className='text-base font-semibold text-white ml-3'>
-							使用 Apple 登录
+							Continue with Apple
 						</Text>
 					</TouchableOpacity>
 
 					{/* 隐私政策链接 */}
 					<View className='items-center'>
-						<Text className='text-xs text-white text-center opacity-70 leading-5'>
-							登录即表示您同意我们的{' '}
-							<Text className='text-[#60cb96] underline'>服务条款</Text> 和{' '}
-							<Text className='text-[#60cb96] underline'>隐私政策</Text>
+						<Text className=' text-white text-center opacity-70 leading-5'>
+							By signing in, you agree to our
 						</Text>
+						<View className='flex-row items-center mt-2'>
+							<Text className='text-[#60cb96] underline '>
+								Terms of Service
+							</Text>
+							<Text className='text-white mx-1 opacity-70'>and</Text>
+							<Text className='text-[#60cb96] underline'>Privacy Policy</Text>
+						</View>
 					</View>
 				</View>
 			</View>
