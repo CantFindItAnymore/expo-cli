@@ -28,7 +28,7 @@ export default function ProfileScreen() {
 	return (
 		<View
 			style={{ paddingTop: statusBarHeight }}
-			className={cn('p-5 bg-white')}
+			className={cn('p-5 bg-orange-200 flex-1')}
 		>
 			<Text style={{ fontSize: 18, marginBottom: 10 }}>
 				create with ❤️ by Rjx

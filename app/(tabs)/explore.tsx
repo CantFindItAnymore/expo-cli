@@ -1,6 +1,9 @@
 import FullScreenSwiperV3 from '@/components/FullScreenSwiperV3'
+import { useRouter } from 'expo-router'
 
 export default function TabTwoScreen() {
+	const router = useRouter()
+
 	return (
 		<FullScreenSwiperV3
 			data={[
@@ -47,6 +50,10 @@ export default function TabTwoScreen() {
 			]}
 			initialIndex={0}
 			onIndexChange={() => {}}
+			onClick={index => {
+				// 跳转至roleDetail
+				router.push(`/roleDetail?index=${index}`)
+			}}
 		/>
 	)
 }

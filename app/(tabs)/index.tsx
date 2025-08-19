@@ -262,7 +262,7 @@ export default function HomeScreen() {
 	const statusBarHeight = insets.top
 
 	const renderChatItem = ({ item }: { item: (typeof mockChatHistory)[0] }) => (
-		<Link href={`/roleDetail?id=${item.id}&name=${item.name}`} asChild>
+		<Link href={`/chat?id=${item.id}&name=${item.name}`} asChild>
 			<TouchableOpacity className='px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700'>
 				<View className='flex-row items-center'>
 					{/* 头像 */}

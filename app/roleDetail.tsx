@@ -63,7 +63,7 @@ export default function RoleDetailScreen() {
 		<TouchableOpacity
 			className='mb-3'
 			style={{ width: itemWidth }}
-			onPress={() => console.log('点击照片:', item.title)}
+			onPress={() => {}}
 		>
 			<View className='bg-white dark:bg-gray-800 overflow-hidden'>
 				<Image

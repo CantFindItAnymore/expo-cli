@@ -12,6 +12,7 @@ export interface FullScreenSwiperV3Props {
 	initialIndex?: number
 	onIndexChange?: (index: number) => void
 	children?: (item: any, index: number) => React.ReactNode
+	onClick?: (index: number) => void
 }
 
 const FullScreenSwiperV3: React.FC<FullScreenSwiperV3Props> = ({
@@ -19,6 +20,7 @@ const FullScreenSwiperV3: React.FC<FullScreenSwiperV3Props> = ({
 	initialIndex = 0,
 	onIndexChange,
 	children,
+	onClick,
 }) => {
 	const flatListRef = useRef<FlatList>(null)
 	const [currentIndex, setCurrentIndex] = useState(initialIndex)
@@ -45,10 +47,7 @@ const FullScreenSwiperV3: React.FC<FullScreenSwiperV3Props> = ({
 	// 渲染每一项
 	const renderItem = useCallback(
 		({ item, index }: { item: any; index: number }) => (
-			<TouchableOpacity
-				activeOpacity={1}
-				onPress={() => console.log('onPress', index)}
-			>
+			<TouchableOpacity activeOpacity={1} onPress={() => onClick?.(index)}>
 				<View
 					style={{
 						width: SCREEN_WIDTH,

@@ -66,7 +66,6 @@ export const useViewPhoto = (
 						onSwipeDown={hide}
 						onClick={hide}
 						onChange={index => {
-							console.log('index', index)
 							setImageIndex(index || 0)
 						}}
 						backgroundColor={backgroundColor}
