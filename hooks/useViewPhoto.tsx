@@ -1,7 +1,7 @@
-import { Ionicons } from '@expo/vector-icons'
 import React, { useCallback, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import ImageViewing from 'react-native-image-viewing'
+import { Modal, Text, View } from 'react-native'
+import ImageViewer from 'react-native-image-zoom-viewer'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface ViewPhotoOptions {
 	/** 是否显示索引指示器，默认为true */
@@ -28,6 +28,9 @@ interface UseViewPhotoReturn {
 export const useViewPhoto = (
 	options: ViewPhotoOptions = {}
 ): UseViewPhotoReturn => {
+	const insets = useSafeAreaInsets()
+	const statusBarHeight = insets.top // 状态栏高度
+
 	const [visible, setVisible] = useState(false)
 	const [images, setImages] = useState<{ uri: string }[]>([])
 	const [imageIndex, setImageIndex] = useState(0)
@@ -47,48 +50,56 @@ export const useViewPhoto = (
 		setVisible(false)
 	}, [])
 
-	// 自定义头部组件
-	const HeaderComponent = useCallback(
-		({ imageIndex }: { imageIndex: number }) => (
-			<View className='mt-10 flex-row justify-between items-center px-4 py-3 bg-black/50'>
-				<TouchableOpacity
-					onPress={hide}
-					className='p-2 rounded-full bg-black/30'
-					activeOpacity={0.7}
-				>
-					<Ionicons name='close' size={24} color='white' />
-				</TouchableOpacity>
-
-				{showIndexIndicator && images.length > 1 && (
-					<Text className='text-white text-base font-medium'>
-						{imageIndex + 1} / {images.length}
-					</Text>
-				)}
-			</View>
-		),
-		[hide, showIndexIndicator, images.length]
-	)
-
 	const ViewPhotoComponent: React.FC = useCallback(() => {
 		if (!images || images.length === 0) {
 			return null
 		}
 
+		const imageUrls = images.map(img => ({ url: img.uri }))
+
 		return (
-			<ImageViewing
-				images={images}
-				imageIndex={imageIndex}
-				visible={visible}
-				onRequestClose={hide}
-				backgroundColor={backgroundColor}
-				swipeToCloseEnabled={true}
-				doubleTapToZoomEnabled={true}
-				HeaderComponent={HeaderComponent}
-				presentationStyle='overFullScreen'
-				animationType='fade'
-			/>
+			<Modal visible={visible} transparent={true} animationType='fade'>
+				<View className='flex-1'>
+					<ImageViewer
+						imageUrls={imageUrls}
+						index={imageIndex}
+						onSwipeDown={hide}
+						onClick={hide}
+						onChange={index => {
+							console.log('index', index)
+							setImageIndex(index || 0)
+						}}
+						backgroundColor={backgroundColor}
+						enableSwipeDown={true}
+						enableImageZoom={true}
+						useNativeDriver={false}
+						saveToLocalByLongPress={false}
+						// 指示器位于下方
+						renderIndicator={(index = 1, total) => (
+							<View
+								style={{
+									position: 'absolute',
+									bottom: 50,
+									left: 0,
+									right: 0,
+									height: 40,
+									justifyContent: 'center',
+									alignItems: 'center',
+									zIndex: 1000,
+								}}
+							>
+								<Text
+									style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+								>
+									{index} / {total}
+								</Text>
+							</View>
+						)}
+					/>
+				</View>
+			</Modal>
 		)
-	}, [images, imageIndex, visible, hide, backgroundColor, HeaderComponent])
+	}, [images, hide, backgroundColor, visible])
 
 	return {
 		show,
